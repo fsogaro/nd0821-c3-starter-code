@@ -1,4 +1,4 @@
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 
 
@@ -20,7 +20,7 @@ def train_model(X_train, y_train):
     """
 
     # todo: get  different models
-    mdl = RandomForestRegressor()
+    mdl = RandomForestClassifier()
     # optimise best parameters
     # fit best parameters
     mdl.fit(X_train, y_train)
