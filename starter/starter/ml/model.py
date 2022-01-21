@@ -1,3 +1,4 @@
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 
 
@@ -18,7 +19,13 @@ def train_model(X_train, y_train):
         Trained machine learning model.
     """
 
-    pass
+    # todo: get  different models
+    mdl = RandomForestRegressor()
+    # optimise best parameters
+    # fit best parameters
+    mdl.fit(X_train, y_train)
+    # return model
+    return mdl
 
 
 def compute_model_metrics(y, preds):

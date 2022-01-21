@@ -3,7 +3,8 @@ from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
 
 
 def process_data(
-    X, categorical_features=[], label=None, training=True, encoder=None, lb=None
+        X, categorical_features=[], label=None, training=True, encoder=None,
+        lb=None
 ):
     """ Process the data used in the machine learning pipeline.
 
@@ -64,7 +65,10 @@ def process_data(
             y = lb.transform(y.values).ravel()
         # Catch the case where y is None because we're doing inference.
         except AttributeError:
-            pass
+            if training is False:
+                y = np.array([])
+            else:
+                raise ValueError("cannot transform y value and training==True")
 
     X = np.concatenate([X_continuous, X_categorical], axis=1)
     return X, y, encoder, lb
