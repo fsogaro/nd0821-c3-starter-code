@@ -1,0 +1,4 @@
+outs:
+- md5: d28b22b17c776685f8ce7235947480a1
+  size: 66422179
+  path: trained_model.pickle
