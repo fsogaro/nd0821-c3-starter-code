@@ -1,10 +1,13 @@
+import logging
+
+import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import fbeta_score, precision_score, recall_score
+from sklearn.model_selection import cross_val_score
 
-
-# Optional: implement hyperparameter tuning.
 from ml.data import process_data, slice_data_on_category
 from collections import defaultdict
+logger = logging.getLogger()
 
 def train_model(X_train, y_train):
     """
@@ -26,6 +29,10 @@ def train_model(X_train, y_train):
     mdl = RandomForestClassifier()
     # optimise best parameters
     # fit best parameters
+    scores = cross_val_score(mdl, X_train, y_train, cv=5)
+    logging.info(f"*** cv score mean:{np.mean(scores)}  ***")
+    logging.info(f"*** cv score std:{np.std(scores)}  ***")
+
     mdl.fit(X_train, y_train)
     # return model
     return mdl
