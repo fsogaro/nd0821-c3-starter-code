@@ -72,3 +72,10 @@ def process_data(
 
     X = np.concatenate([X_continuous, X_categorical], axis=1)
     return X, y, encoder, lb
+
+
+def slice_data_on_category(data, column, category):
+    data_sliced = data.copy()
+    data_sliced = data_sliced[data_sliced[column] == category].reset_index(
+        drop=True)
+    return data_sliced

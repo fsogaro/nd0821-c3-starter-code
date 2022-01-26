@@ -3,6 +3,9 @@ from sklearn.metrics import fbeta_score, precision_score, recall_score
 
 
 # Optional: implement hyperparameter tuning.
+from ml.data import process_data, slice_data_on_category
+from collections import defaultdict
+
 def train_model(X_train, y_train):
     """
     Trains a machine learning model and returns it.
@@ -64,4 +67,31 @@ def inference(model, X):
     preds : np.array
         Predictions from the model.
     """
-    pass
+    return model.predict(X)
+
+def categorical_slice_performance(data, mdl, encoder, lb, cat_features):
+
+    performance_sliced = defaultdict(dict)
+    for feature in cat_features:
+        feature_categ = data[feature].unique()
+        perf_categ = defaultdict(float)
+
+        for category in feature_categ:
+            sliced = slice_data_on_category(data, feature, category)
+            X_slice, y_slice, _, _ = process_data(
+                sliced,
+                categorical_features=cat_features,
+                label="salary",
+                training=False,
+                encoder=encoder,
+                lb=lb
+            )
+            preds = inference(mdl, X_slice)
+            perf_categ[category], r, f = compute_model_metrics(y_slice, preds)
+        performance_sliced[feature] = perf_categ
+
+    return performance_sliced
+
+
+
+

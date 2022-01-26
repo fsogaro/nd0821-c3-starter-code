@@ -4,8 +4,9 @@ import logging
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from ml.data import process_data
-from ml.model import train_model, compute_model_metrics
-from ml.utils import save_pickle
+from ml.model import train_model, compute_model_metrics,\
+    categorical_slice_performance
+from ml.utils import save_pickle, save_df_as_image
 # Add the necessary imports for the starter code.
 # Add code to load in the data.
 logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(message)s")
@@ -65,6 +66,13 @@ def go():
     logging.info(f"*** METRICS: ***")
     logging.info(f"\n precision: {precision},\n recall: {recall},\n fbeta:"
                  f" {fbeta}")
+
+    logging.info("*** computing performance on slices of test data ***")
+    slice_perf_dict = categorical_slice_performance(
+        test, mdl, encoder, lb, cat_features)
+
+    save_df_as_image(pd.DataFrame(slice_perf_dict),
+                     os.path.join("..", "screenshots", "sliced_performances"))
 
 
 if __name__ == "__main__":
