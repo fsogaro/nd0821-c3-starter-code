@@ -22,6 +22,21 @@ def save_pickle(model: Any, filename: str) -> None:
     with open(filename, 'wb') as files:
         pickle.dump(model, files)
 
+def load_pickle(file):
+    """
+
+        Parameters
+        ----------
+        filename
+
+        Returns
+        -------
+
+        """
+    with open(file, "rb") as f:
+        pickle_object = pickle.load(f)
+    return pickle_object
+
 def save_df_as_image(df, path):
     # Set background to white
     norm = matplotlib.colors.Normalize(-1,1)

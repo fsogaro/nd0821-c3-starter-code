@@ -12,7 +12,7 @@ from ml.utils import save_pickle, save_df_as_image
 logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(message)s")
 logger = logging.getLogger()
 
-def go():
+def develop_model():
     data = pd.read_csv("../data/census_int.csv")
     save_path = os.path.join("..", "model")
     logging.info(f"*** loaded data: shape {data.shape} ***")
@@ -76,4 +76,4 @@ def go():
 
 
 if __name__ == "__main__":
-    go()
+    develop_model()
