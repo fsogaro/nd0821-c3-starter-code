@@ -2,15 +2,11 @@
 
 # Import Union since our Item object will have tags that can be strings or a list.
 import os
-from typing import Union, Optional, AnyStr
+from typing import Union, Optional
 
 import pandas as pd
 from fastapi import FastAPI
-# BaseModel from Pydantic is used to define data objects.
 from pydantic import BaseModel
-import requests
-import json
-
 from starter.ml.data import process_data
 from starter.ml.utils import load_pickle
 
@@ -19,14 +15,7 @@ app = FastAPI()
 
 @app.get("/")
 async def welcome_msg():
-    return {"message": f"Hi human! Welcome to my prediction app!"}
-
-
-# Declare the data object with its components and their type.
-class TaggedItem(BaseModel):
-    name: str
-    tags: Union[str, list]
-    item_id: int
+    return "HOLA"#{"message": f"Hi human! Welcome to my prediction app!"}
 
 
 class CensusData(BaseModel):
