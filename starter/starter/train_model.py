@@ -40,6 +40,7 @@ def develop_model():
         label="salary",
         training=True
     )
+    logging.info(f"*** Xtrain: shape {X_train.shape} ***")
     logging.info(f"*** processing test ***")
     X_test, y_test, _, _ = process_data(
         test,
@@ -49,6 +50,7 @@ def develop_model():
         encoder=encoder,
         lb=lb
     )
+    logging.info(f"*** Xtrain: shape {X_test.shape} ***")
 
     logging.info(f"*** saving encoders  ***")
 

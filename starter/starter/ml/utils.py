@@ -37,7 +37,7 @@ def load_pickle(file):
 
 def save_df_as_image(df, path):
     # Set background to white
-    norm = matplotlib.colors.Normalize(-1,1)
+    norm = plt.colors.Normalize(-1,1)
     colors = [[norm(-1.0), "white"],
             [norm( 1.0), "white"]]
     cmap = plt.colors.LinearSegmentedColormap.from_list("", colors)

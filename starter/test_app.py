@@ -11,7 +11,7 @@ client = TestClient(app)
 
 def test_get_path():
     r = client.get("/")
-    assert r.json() == {"message": "Hi human! Welcome to my prediction app!"}
+    assert r.json() == "Hi human! Welcome to my prediction app!"
 
 
 def test_get_malformed():
