@@ -15,7 +15,7 @@ app = FastAPI()
 
 @app.get("/")
 async def welcome_msg():
-    return "HOLA"#{"message": f"Hi human! Welcome to my prediction app!"}
+    return "Hi human! Welcome to my prediction app!"
 
 
 class CensusData(BaseModel):
@@ -55,7 +55,7 @@ async def predict(data: CensusData):
         encoder = load_pickle(os.path.join("model", "hot_encoder.pickle"))
         lb = load_pickle(os.path.join("model", "label_encoder.pickle"))
     else:
-        raise NotImplementedError("need cloud setup")
+        return "not implemented"
 
     print(data.dict())
     df = pd.DataFrame(data.dict(), index=[0])
