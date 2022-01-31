@@ -5,12 +5,23 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from ml.data import process_data
 from ml.model import train_model, compute_model_metrics,\
-    categorical_slice_performance
-from ml.utils import save_pickle, save_df_as_image
+    categorical_slice_performance, inference_new_data
+from ml.utils import save_pickle, save_df_as_image, load_pickle
 # Add the necessary imports for the starter code.
 # Add code to load in the data.
 logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(message)s")
 logger = logging.getLogger()
+
+cat_features = [
+        "workclass",
+        "education",
+        "marital-status",
+        "occupation",
+        "relationship",
+        "race",
+        "sex",
+        "native-country",
+    ]
 
 def develop_model():
     data = pd.read_csv("../data/census_int.csv")
@@ -21,16 +32,16 @@ def develop_model():
     # Optional enhancement, use K-fold cross validation instead of a train-test split.
     train, test = train_test_split(data, test_size=0.20)
 
-    cat_features = [
-        "workclass",
-        "education",
-        "marital-status",
-        "occupation",
-        "relationship",
-        "race",
-        "sex",
-        "native-country",
-    ]
+    # cat_features = [
+    #     "workclass",
+    #     "education",
+    #     "marital-status",
+    #     "occupation",
+    #     "relationship",
+    #     "race",
+    #     "sex",
+    #     "native-country",
+    # ]
     logging.info(f"*** processing train ***")
 
 
@@ -79,3 +90,13 @@ def develop_model():
 
 if __name__ == "__main__":
     develop_model()
+    logging.info("testing prediction on new data")
+    cwd = os.getcwd()
+    mdl = load_pickle(os.path.join(cwd, "..", "model", "trained_model.pickle"))
+    encoder = load_pickle(os.path.join(cwd, "..", "model", "hot_encoder.pickle"))
+    lb = load_pickle(os.path.join(cwd, "..", "model", "label_encoder.pickle"))
+
+    df = pd.read_csv("../data/census_int.csv").iloc[:1, :-1]
+
+
+    y = inference_new_data(df, mdl, encoder, lb, cat_features=cat_features)

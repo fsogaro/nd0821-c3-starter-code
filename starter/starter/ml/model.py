@@ -61,21 +61,17 @@ def compute_model_metrics(y, preds):
     return precision, recall, fbeta
 
 
-def inference(model, X):
-    """ Run model inferences and return the predictions.
+def inference_new_data(data, mdl, encoder, lb, cat_features):
+    x, _, _, _ = process_data(
+        data,
+        categorical_features=cat_features,
+        label=None,
+        training=False,
+        encoder=encoder,
+        lb=lb
+    )
+    return mdl.predict(x)
 
-    Inputs
-    ------
-    model : ???
-        Trained machine learning model.
-    X : np.array
-        Data used for prediction.
-    Returns
-    -------
-    preds : np.array
-        Predictions from the model.
-    """
-    return model.predict(X)
 
 def categorical_slice_performance(data, mdl, encoder, lb, cat_features):
 
@@ -94,7 +90,7 @@ def categorical_slice_performance(data, mdl, encoder, lb, cat_features):
                 encoder=encoder,
                 lb=lb
             )
-            preds = inference(mdl, X_slice)
+            preds = mdl.predict(X_slice)
             perf_categ[category], r, f = compute_model_metrics(y_slice, preds)
         performance_sliced[feature] = perf_categ
 

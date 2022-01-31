@@ -28,6 +28,6 @@ def test_post_params():
     r = client.post("/predict", json={"age": 60})
     assert r.status_code == 200
     assert r.json()["data"]["age"] == 60
-    assert r.json()["data"]["native_country"] == "United-States"
-    assert r.json()["prediction"] == 1
+    assert r.json()["data"]["native-country"] == "United-States"
+    assert r.json()["prediction"] == 0
 

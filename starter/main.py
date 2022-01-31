@@ -6,8 +6,9 @@ from typing import Union, Optional
 
 import pandas as pd
 from fastapi import FastAPI
+from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, Field
-from starter.ml.data import process_data
+from starter.ml.model import inference_new_data
 from starter.ml.utils import load_pickle
 
 app = FastAPI()
@@ -36,6 +37,9 @@ class CensusData(BaseModel):
     native_country: Optional[str] = Field("United-States",
                                           alias="native-country")
 
+    class Config:
+        arbitrary_types_allowed = True
+
 
 # This allows sending of data (our TaggedItem) via POST to the API.
 @app.post("/predict")
@@ -63,28 +67,8 @@ async def predict(data: CensusData):
     encoder = load_pickle(os.path.join(cwd, "model", "hot_encoder.pickle"))
     lb = load_pickle(os.path.join(cwd, "model", "label_encoder.pickle"))
 
-    print(data.dict(by_alias=True))
-    df = pd.DataFrame(data.dict(by_alias=True), index=[0])
-    print(df.columns)
-    print(df.shape)
-    y = inference(df, mdl, encoder, lb, cat_features=cat_features)
+    df = pd.DataFrame(jsonable_encoder(data.dict(by_alias=True)), index=[0])
+    y = inference_new_data(df, mdl, encoder, lb, cat_features=cat_features)
 
-    return {"data": data, "prediction": y}
+    return {"data": data, "prediction": y.tolist()[0]}
 
-
-def inference(data, mdl, encoder, lb, cat_features):
-    print("in inference")
-    print(data.shape)
-    x, _, _, _ = process_data(
-        data,
-        categorical_features=cat_features,
-        label=None,
-        training=False,
-        encoder=encoder,
-        lb=lb
-    )
-    print("made x")
-    print(x.shape)
-    print(x.type)
-    print(type(mdl))
-    return mdl.predict(x)
