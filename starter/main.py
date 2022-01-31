@@ -24,7 +24,8 @@ def list_files(startpath):
         print('{}{}/'.format(indent, os.path.basename(root)))
         subindent = ' ' * 4 * (level + 1)
         for f in files:
-            print('{}{}'.format(subindent, f))
+            if ".pyc" not in f and ".so" not in f and ".json" not in f:
+                print('{}{}'.format(subindent, f))
 
 @app.get("/")
 async def welcome_msg():
