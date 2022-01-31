@@ -79,9 +79,7 @@ async def predict(data: CensusData):
     print("***----***" * 50)
     print(os.system("ls -a"))
     print("***----***"*50)
-    print(os.system("ls -a ../"))
-    print("***----***" * 50)
-    print(os.system("ls -a ././"))
+    print(os.system("ls -a ./model/"))
 
     print(f"environ: {os.environ}")
     # if "DYNO" in os.environ and os.path.isdir(".dvc"):

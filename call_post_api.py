@@ -19,7 +19,7 @@ if __name__ == "__main__":
     if args.test_env == "local":
         post_url = "http://0.0.0.0:5000/predict"
     else:
-        post_url = 'https://fast-basin-20342.herokuapp.com/predict'
+        post_url = 'https://sheltered-shelf-20033.herokuapp.com/predict'
 
     print(post_url)
     print(json.dumps(data))
