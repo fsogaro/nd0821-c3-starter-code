@@ -18,7 +18,6 @@ jobs:
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        role-to-assume: arn:aws:iam::180451944451:user/with_s3access
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
@@ -32,6 +31,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8 pytest
         if [ -f starter/requirements.txt ]; then pip install -r starter/requirements.txt; fi
+    - name: Setup DVC
+      uses: iterative/setup-dvc@v1
+    - name: Pull data from DVC
+      run: dvc pull
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
