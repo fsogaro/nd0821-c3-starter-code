@@ -62,6 +62,9 @@ async def predict(data: CensusData):
                  f"need to call dvc")
 
     # Heroku access to DVC data
+    print("is dir")
+    print(os.path.isdir("../.dvc"))
+    print(f"environ: {os.environ}")
     if "DYNO" in os.environ and os.path.isdir("../.dvc"):
         os.system("dvc config core.no_scm true")
         # os.system("dvc remote add -d s3-bucket s3://udacity-mldevops-p3/dvcstore")
