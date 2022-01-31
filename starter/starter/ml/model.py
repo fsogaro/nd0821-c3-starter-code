@@ -95,7 +95,3 @@ def categorical_slice_performance(data, mdl, encoder, lb, cat_features):
         performance_sliced[feature] = perf_categ
 
     return performance_sliced
-
-
-
-

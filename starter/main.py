@@ -2,7 +2,7 @@
 
 # Import Union since our Item object will have tags that can be strings or a list.
 import os
-from typing import Union, Optional
+from typing import Optional
 
 import pandas as pd
 from fastapi import FastAPI
