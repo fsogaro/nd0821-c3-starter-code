@@ -75,8 +75,6 @@ async def predict(data: CensusData):
     print(f"cwd : {os.getcwd()}")
     list_files(os.getcwd())
     print("***----***"*50)
-    list_files(os.path.join(".."))
-    print("***----***" * 50)
 
     print(f"environ: {os.environ}")
     if "DYNO" in os.environ and os.path.isdir("../.dvc"):
