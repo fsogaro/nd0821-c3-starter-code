@@ -73,9 +73,10 @@ async def predict(data: CensusData):
                  f"need to call dvc")
 
     # Heroku access to DVC data
-    print("lookimg for dir structure")
+    print("looking for dir structure")
     print(f"cwd : {os.getcwd()}")
-    list_files(os.getcwd())
+    print("***----***" * 50)
+    list_files(os.walk())
     print("***----***"*50)
 
     print(f"environ: {os.environ}")
