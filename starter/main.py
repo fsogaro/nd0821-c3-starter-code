@@ -17,6 +17,15 @@ app = FastAPI()
 logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(message)s")
 logger = logging.getLogger()
 
+def list_files(startpath):
+    for root, dirs, files in os.walk(startpath):
+        level = root.replace(startpath, '').count(os.sep)
+        indent = ' ' * 4 * (level)
+        print('{}{}/'.format(indent, os.path.basename(root)))
+        subindent = ' ' * 4 * (level + 1)
+        for f in files:
+            print('{}{}'.format(subindent, f))
+
 @app.get("/")
 async def welcome_msg():
     return "Hi human! Welcome to my prediction app!"
@@ -62,8 +71,13 @@ async def predict(data: CensusData):
                  f"need to call dvc")
 
     # Heroku access to DVC data
-    print("is dir")
-    print(os.path.isdir("../.dvc"))
+    print("lookimg for dir structure")
+    print(f"cwd : {os.getcwd()}")
+    list_files(os.getcwd())
+    print("***----***"*50)
+    list_files(os.path.join(".."))
+    print("***----***" * 50)
+
     print(f"environ: {os.environ}")
     if "DYNO" in os.environ and os.path.isdir("../.dvc"):
         os.system("dvc config core.no_scm true")
