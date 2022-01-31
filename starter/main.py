@@ -20,11 +20,12 @@ logger = logging.getLogger()
 def list_files(startpath):
     for root, dirs, files in os.walk(startpath):
         level = root.replace(startpath, '').count(os.sep)
-        indent = ' ' * 4 * (level)
+        indent = '_' * 4 * (level)
         print('{}{}/'.format(indent, os.path.basename(root)))
-        subindent = ' ' * 4 * (level + 1)
+        subindent = '_' * 4 * (level + 1)
         for f in files:
-            if ".pyc" not in f and ".so" not in f and ".json" not in f:
+            if ".pyc" not in f and ".so" not in f and ".json" not in f and \
+                    ".h" not in f:
                 print('{}{}'.format(subindent, f))
 
 @app.get("/")
