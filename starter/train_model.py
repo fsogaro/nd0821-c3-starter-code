@@ -24,8 +24,8 @@ cat_features = [
     ]
 
 def develop_model():
-    data = pd.read_csv("data/census_int.csv")
-    save_path = os.path.join("", "model")
+    data = pd.read_csv("../data/census_int.csv")
+    save_path = os.path.join("..", "model")
     logging.info(f"*** loaded data: shape {data.shape} ***")
     logging.info(f"*** loaded data: columns {data.columns} ***")
 
@@ -85,7 +85,7 @@ def develop_model():
         test, mdl, encoder, lb, cat_features)
 
     save_df_as_image(pd.DataFrame(slice_perf_dict),
-                     os.path.join("", "screenshots", "sliced_performances"))
+                     os.path.join("..", "screenshots", "sliced_performances"))
 
 
 if __name__ == "__main__":
@@ -97,7 +97,9 @@ if __name__ == "__main__":
                                        "hot_encoder.pickle"))
     lb = load_pickle(os.path.join(cwd, "..", "model", "label_encoder.pickle"))
 
-    df = pd.read_csv("../data/census_int.csv").iloc[:1, :-1]
+    df = pd.read_csv("../data/census_int.csv").iloc[:, :-1]
 
 
-    y = inference_new_data(df, mdl, encoder, lb, cat_features=cat_features)
+    y = inference_new_data(df.head(9).tail(1), mdl, encoder, lb,
+        cat_features=cat_features)
+    print(y)
