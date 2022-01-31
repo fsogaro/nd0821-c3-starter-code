@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from ml.data import process_data
 from ml.model import train_model, compute_model_metrics,\
     categorical_slice_performance, inference_new_data
-from ml.utils import save_pickle, save_df_as_image, load_pickle
+from ml.utils import save_pickle, save_df_as_csv, load_pickle
 # Add the necessary imports for the starter code.
 # Add code to load in the data.
 logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(message)s")
@@ -84,7 +84,7 @@ def develop_model():
     slice_perf_dict = categorical_slice_performance(
         test, mdl, encoder, lb, cat_features)
 
-    save_df_as_image(pd.DataFrame(slice_perf_dict),
+    save_df_as_csv(pd.DataFrame(slice_perf_dict),
                      os.path.join("..", "screenshots", "sliced_performances"))
 
 

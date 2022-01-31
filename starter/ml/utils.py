@@ -46,3 +46,6 @@ def save_df_as_image(df, path):
     fig = plot.get_figure()
     fig.set_size_inches(15, 20)
     fig.savefig(path)
+
+def save_df_as_csv(df, path):
+    df.to_csv(f"{path}.csv")
