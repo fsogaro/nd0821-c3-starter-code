@@ -76,7 +76,7 @@ async def predict(data: CensusData):
     print("looking for dir structure")
     print(f"cwd : {os.getcwd()}")
     print("***----***" * 50)
-    list_files(os.walk())
+    list_files("././")
     print("***----***"*50)
 
     print(f"environ: {os.environ}")
