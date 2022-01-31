@@ -30,32 +30,3 @@ slicing shows concerns over ceratain features
 
 ## Caveats and Recommendations
 model is for education on MLE deplyment purposes only
-
------
-## Learning's: dvc, github actions, heroku
-
-##### folder structure
-- make sure to deploy from root of repo Procfile, Aptfile and main.py should 
-  be in the same level as the .github & .dvc folders (if there is a way to 
-  deploy a sub folder to heroku I did not find it)
-  
-
-- once the dvc remote on aws is set up, you have an IAM role with s3 access 
-  rights, create an secret key access for this role and use these secrets 
-  for both github actions and heroku model
-  
-###### to make sure dvc works on heroku:
--  run `heroku buildpacks:add --index 1 heroku-community/apt` in the cd of 
-  the project with heroku CLI
-- have the Aptfile with the link to the dvc version
-- have set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY as Config vars in heroku
-
-###### to make sure dvc works on github actions:
-- see .github/workflows/python-app.yml but ultimatly you need
-- set the access keys and secret on the action, 
-- setup and pull dvc
-
-###### a post method requires something to post!
-1. from local script see nd0821-c3-starter-code/call_post_api.py
-2. from interactive, lauch the app, then navigate to "docs" e.g.
-   https://sheltered-shelf-20033.herokuapp.com/docs and use the interactive post method
