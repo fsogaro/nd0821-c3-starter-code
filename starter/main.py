@@ -76,8 +76,11 @@ async def predict(data: CensusData):
     print("looking for dir structure")
     print(f"cwd : {os.getcwd()}")
     print("***----***" * 50)
-    list_files("././")
+    os.system("ls -a")
     print("***----***"*50)
+    os.system("ls -a ../")
+    print("***----***" * 50)
+    os.system("ls -a ././")
 
     print(f"environ: {os.environ}")
     if "DYNO" in os.environ and os.path.isdir("../.dvc"):
