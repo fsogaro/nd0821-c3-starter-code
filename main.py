@@ -3,6 +3,7 @@
 # Import Union since our Item object will have tags that can be strings or a list.
 import os
 import logging
+import subprocess
 from typing import Optional
 
 import pandas as pd
