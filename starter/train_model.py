@@ -24,7 +24,7 @@ cat_features = [
     ]
 
 def develop_model():
-    data = pd.read_csv("../data/census_int.csv")
+    data = pd.read_csv("data/census_int.csv")
     save_path = os.path.join("", "model")
     logging.info(f"*** loaded data: shape {data.shape} ***")
     logging.info(f"*** loaded data: columns {data.columns} ***")
@@ -92,9 +92,10 @@ if __name__ == "__main__":
     develop_model()
     logging.info("testing prediction on new data")
     cwd = os.getcwd()
-    mdl = load_pickle(os.path.join(cwd, "", "model", "trained_model.pickle"))
-    encoder = load_pickle(os.path.join(cwd, "", "model", "hot_encoder.pickle"))
-    lb = load_pickle(os.path.join(cwd, "", "model", "label_encoder.pickle"))
+    mdl = load_pickle(os.path.join(cwd, "..", "model", "trained_model.pickle"))
+    encoder = load_pickle(os.path.join(cwd, "..", "model",
+                                       "hot_encoder.pickle"))
+    lb = load_pickle(os.path.join(cwd, "..", "model", "label_encoder.pickle"))
 
     df = pd.read_csv("../data/census_int.csv").iloc[:1, :-1]
 
