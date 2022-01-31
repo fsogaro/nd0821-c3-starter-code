@@ -76,14 +76,12 @@ async def predict(data: CensusData):
     # Heroku access to DVC data
     print("looking for dir structure")
     print(f"cwd : {os.getcwd()}, {os.path.isdir('.dvc')}")
-    if os.system("dvc pull") != 0:
-        exit("dvc pull failed")
     print("***----***" * 50)
-    os.system("ls -a")
+    print(os.system("ls -a"))
     print("***----***"*50)
-    os.system("ls -a ../")
+    print(os.system("ls -a ../"))
     print("***----***" * 50)
-    os.system("ls -a ././")
+    print(os.system("ls -a ././"))
 
     print(f"environ: {os.environ}")
     # if "DYNO" in os.environ and os.path.isdir(".dvc"):
