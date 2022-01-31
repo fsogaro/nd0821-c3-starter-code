@@ -1,4 +1,0 @@
-outs:
-- md5: df25af683db4d98905ddb9994cf3a36a
-  size: 1933
-  path: hot_encoder.pickle
