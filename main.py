@@ -85,7 +85,7 @@ async def predict(data: CensusData):
     os.system("ls -a ././")
 
     print(f"environ: {os.environ}")
-    if "DYNO" in os.environ and os.path.isdir("../.dvc"):
+    if "DYNO" in os.environ and os.path.isdir(".dvc"):
         os.system("dvc config core.no_scm true")
         # os.system("dvc remote add -d s3-bucket s3://udacity-mldevops-p3/dvcstore")
         if os.system("dvc pull") != 0:
