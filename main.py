@@ -74,7 +74,7 @@ async def predict(data: CensusData):
 
     # Heroku access to DVC data
     print("looking for dir structure")
-    print(f"cwd : {os.getcwd()}")
+    print(f"cwd : {os.getcwd()}, {os.path.isdir('.dvc')}")
     if os.system("dvc pull") != 0:
         exit("dvc pull failed")
     print("***----***" * 50)
